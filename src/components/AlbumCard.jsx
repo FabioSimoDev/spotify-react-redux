@@ -3,7 +3,7 @@
 
 import { Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { setLikedSongs, setPlaying } from "../Redux/actions";
+import { removeLikedSong, setLikedSongs, setPlaying } from "../Redux/actions";
 import { SuitHeartFill } from "react-bootstrap-icons";
 // import heart from "../assets/Heart Icon.png"
 
@@ -16,16 +16,17 @@ const AlbumCard = ({ song }) => {
     if (selectedSong === song) {
       return;
     } else {
-      if (isLiked) {
-        return;
-      } else {
-        dispatch(setPlaying(song));
-      }
+      dispatch(setPlaying(song));
     }
   };
 
   const setLike = function () {
-    dispatch(setLikedSongs(song));
+    console.log("isLiked:", isLiked);
+    if (isLiked) {
+      dispatch(removeLikedSong(song));
+    } else {
+      dispatch(setLikedSongs(song));
+    }
   };
 
   return (
@@ -73,6 +74,7 @@ const AlbumCard = ({ song }) => {
             color="green"
             size={24}
             className="position-absolute end-0"
+            onClick={() => setLike()}
           />
         )}
       </div>

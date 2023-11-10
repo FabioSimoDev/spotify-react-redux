@@ -71,17 +71,21 @@ const Sidebar = () => {
                 Search
               </Button>
             </Form>
-            <h5 className="text-white pt-3">
-              Ti sono piaciuti{" "}
-              <SuitHeartFill color="green" size={12}></SuitHeartFill>
-            </h5>
-            <ul className="text-white d-flex flex-column gap-2">
-              {likedSongs.map((song) => (
-                <small key={song.id} className="opacity-75">
-                  {song.title}
-                </small>
-              ))}
-            </ul>
+            {likedSongs.length !== 0 && (
+              <>
+                <h5 className="text-white pt-3">
+                  Ti sono piaciuti{" "}
+                  <SuitHeartFill color="green" size={12}></SuitHeartFill>
+                </h5>
+                <ul className="text-white d-flex flex-column gap-2">
+                  {likedSongs.map((song) => (
+                    <small key={song.id} className="opacity-75">
+                      {song.title}
+                    </small>
+                  ))}
+                </ul>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -4,7 +4,8 @@ import {
   SET_PLAYING,
   SET_SEARCH_QUERY,
   SET_SEARCH_RESULTS,
-  SET_LIKED_SONGS
+  SET_LIKED_SONGS,
+  REMOVE_LIKED_SONG
 } from "./actions";
 
 const initialState = {
@@ -48,6 +49,12 @@ const songsReducer = (state = initialState, action) => {
       return {
         ...state,
         liked: [...state.liked, action.payload],
+        error: null
+      };
+    case REMOVE_LIKED_SONG:
+      return {
+        ...state,
+        liked: state.liked.filter((song) => song.id !== action.payload.id),
         error: null
       };
     case SET_ERROR:

@@ -4,6 +4,7 @@ export const SET_PLAYING = "SET_PLAYING";
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const SET_LIKED_SONGS = "SET_LIKED_SONGS";
+export const REMOVE_LIKED_SONG = "REMOVE_LIKED_SONG";
 
 export const setSongs = (songs, section) => ({
   type: SET_SONGS,
@@ -22,6 +23,11 @@ export const setSearchResults = (results) => ({
 
 export const setLikedSongs = (song) => ({
   type: SET_LIKED_SONGS,
+  payload: song
+});
+
+export const removeLikedSong = (song) => ({
+  type: REMOVE_LIKED_SONG,
   payload: song
 });
 
