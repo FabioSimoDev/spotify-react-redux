@@ -3,6 +3,7 @@ export const SET_ERROR = "SET_ERROR";
 export const SET_PLAYING = "SET_PLAYING";
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
+export const SET_LIKED_SONGS = "SET_LIKED_SONGS";
 
 export const setSongs = (songs, section) => ({
   type: SET_SONGS,
@@ -19,9 +20,14 @@ export const setSearchResults = (results) => ({
   payload: { results }
 });
 
+export const setLikedSongs = (song) => ({
+  type: SET_LIKED_SONGS,
+  payload: song
+});
+
 export const setPlaying = (song) => ({
   type: SET_PLAYING,
-  payload: { song }
+  payload: song
 });
 
 export const setError = (error) => ({

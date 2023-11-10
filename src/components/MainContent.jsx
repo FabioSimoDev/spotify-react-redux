@@ -2,11 +2,12 @@
 import { Container, Row, Col } from "react-bootstrap";
 import MusicSection from "./MusicSection";
 import { useSelector } from "react-redux";
+import AlbumCard from "./AlbumCard";
 
 function MainContent() {
   const isSearching = useSelector((state) => state.searchResults);
 
-  console.log(isSearching);
+  //   console.log(isSearching.results.length);
   return (
     <Container fluid className="mainPage">
       <Row className="justify-content-center">
@@ -18,24 +19,32 @@ function MainContent() {
           <a href="#">DISCOVER</a>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <h2 id="rock">Rock Classics</h2>
-          <div className="row imgLinks py-3" id="rockSection">
-            <MusicSection artistName="queen" section="rock" />
-          </div>
+      {isSearching.results.length === 0 ? (
+        <Row>
+          <Col>
+            <h2 id="rock">Rock Classics</h2>
+            <div className="row imgLinks py-3" id="rockSection">
+              <MusicSection artistName="queen" section="rock" />
+            </div>
 
-          <h2 id="pop">Pop</h2>
-          <div className="row imgLinks py-3" id="rockSection">
-            <MusicSection artistName="katyperry" section="pop" />
-          </div>
+            <h2 id="pop">Pop</h2>
+            <div className="row imgLinks py-3" id="rockSection">
+              <MusicSection artistName="katyperry" section="pop" />
+            </div>
 
-          <h2 id="hiphop">Hip Hop</h2>
-          <div className="row imgLinks py-3" id="hipHopSection">
-            <MusicSection artistName="eminem" section="hipHop" />
-          </div>
-        </Col>
-      </Row>
+            <h2 id="hiphop">Hip Hop</h2>
+            <div className="row imgLinks py-3" id="hipHopSection">
+              <MusicSection artistName="eminem" section="hipHop" />
+            </div>
+          </Col>
+        </Row>
+      ) : (
+        <Row lg={4} className="pt-5">
+          {isSearching.results.map((song) => (
+            <AlbumCard song={song} key={song.id} />
+          ))}
+        </Row>
+      )}
     </Container>
   );
 }

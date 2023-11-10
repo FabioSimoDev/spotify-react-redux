@@ -3,7 +3,8 @@ import {
   SET_ERROR,
   SET_PLAYING,
   SET_SEARCH_QUERY,
-  SET_SEARCH_RESULTS
+  SET_SEARCH_RESULTS,
+  SET_LIKED_SONGS
 } from "./actions";
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   hipHop: [],
   playing: {},
   searchQuery: "",
-  searchResults: [],
+  searchResults: { results: [] },
+  liked: [],
   error: null
 };
 
@@ -39,7 +41,13 @@ const songsReducer = (state = initialState, action) => {
     case SET_SEARCH_RESULTS:
       return {
         ...state,
-        SET_SEARCH_RESULTS: action.payload,
+        searchResults: action.payload,
+        error: null
+      };
+    case SET_LIKED_SONGS:
+      return {
+        ...state,
+        liked: [...state.liked, action.payload],
         error: null
       };
     case SET_ERROR:

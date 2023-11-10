@@ -8,11 +8,17 @@ import {
   Button
 } from "react-bootstrap";
 import logo from "../assets/logo/logo.png";
-import { useDispatch } from "react-redux";
-import { searchFetch, setSearchQuery } from "../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  searchFetch,
+  setSearchQuery,
+  setSearchResults
+} from "../Redux/actions";
+import { SuitHeartFill } from "react-bootstrap-icons";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const likedSongs = useSelector((state) => state.liked);
   let query;
   const handleSearch = function (e) {
     query = e.target.value;
@@ -43,7 +49,11 @@ const Sidebar = () => {
           className="align-items-start"
         >
           <Nav className="me-auto flex-column">
-            <Nav.Link href="#" className="d-flex align-items-center">
+            <Nav.Link
+              href="#"
+              className="d-flex align-items-center"
+              onClick={() => dispatch(setSearchResults([]))}
+            >
               <i className="bi bi-house-door-fill"></i>&nbsp; Home
             </Nav.Link>
             <Nav.Link href="#" className="d-flex align-items-center">
@@ -61,6 +71,17 @@ const Sidebar = () => {
                 Search
               </Button>
             </Form>
+            <h5 className="text-white pt-3">
+              Ti sono piaciuti{" "}
+              <SuitHeartFill color="green" size={12}></SuitHeartFill>
+            </h5>
+            <ul className="text-white d-flex flex-column gap-2">
+              {likedSongs.map((song) => (
+                <small key={song.id} className="opacity-75">
+                  {song.title}
+                </small>
+              ))}
+            </ul>
           </Nav>
         </Navbar.Collapse>
       </Container>
